@@ -11,9 +11,10 @@ type Author {
 type Post {
   id: Int!
   author: Author!
+  title: String!
   content: String
   createAt: DateTime!
-  comments: Comment!
+  comments: [Comment!]
   publishedAt: DateTime
 }
 
@@ -22,16 +23,11 @@ type Comment {
   post: Post!
   userName: String!
   text: String!
-  replyTo: Int
+  replyTo: Comment
 }
 
 type Query {
-  user(id: Int!): Author
+  author(id: Int!): Author
   post(id: Int!): Post
   postComments(id: Int!): [Comment!]!
-}
-
-type Mutation {
-  createPost(content: String!): Post!
-  createComment(postId: Int!, text: String!): Comment!
 }

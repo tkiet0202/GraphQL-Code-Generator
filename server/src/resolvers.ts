@@ -15,16 +15,24 @@ const resolvers = {
       return ctx.db.comments.filter((comment: any) => comment.postId === id);
     },
   },
+  Comment: {
+    replyTo: ({ replyToId }: { replyToId: number }, _args: any, ctx: any) => {
+      const matchedComment = ctx.db.comments.filter(
+        (comments: any) => comments.id === replyToId
+      );
+      return;
+    },
+  },
   Query: {
     author: (_parent: any, { id }: { id: number }, context: any) => {
-      const matchedAuthor = context.db.authors.filter(
+      const matchedAuthors = context.db.authors.filter(
         (el: any) => el.id === id
       );
-      return matchedAuthor.length > 0 ? matchedAuthor[0] : null;
+      return matchedAuthors.length > 0 ? matchedAuthors[0] : null;
     },
     post: (_parent: any, { id }: { id: number }, context: any) => {
-      const matchedPost = context.db.post.filter((el: any) => el.id === id);
-      return matchedPost.length > 0 ? matchedPost[0] : null;
+      const matchedPosts = context.db.post.filter((el: any) => el.id === id);
+      return matchedPosts.length > 0 ? matchedPosts[0] : null;
     },
   },
 };
