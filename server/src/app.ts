@@ -3,8 +3,8 @@ import path from "path";
 import express from "express";
 import { graphqlHTTP } from "express-graphql";
 import { makeExecutableSchema } from "@graphql-tools/schema";
-import db from "./db"; //TODO -replace dummy data by prisma + (local sqlite
 import resolvers from "./resolvers";
+import db from "./db";
 
 const app = express();
 
@@ -28,6 +28,6 @@ app.use(
   })
 );
 
-module.exports = app;
+// module.exports = app;
 
 export default app;

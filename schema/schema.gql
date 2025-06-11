@@ -4,8 +4,9 @@ type Author {
   id: Int!
   displayName: String!
   picture: String!
-  posts: [Post!]!
-  createAt: DateTime
+  posts: [Post!]
+  createAt: DateTime!
+  comments: [Comment!]
 }
 
 type Post {
@@ -13,15 +14,15 @@ type Post {
   author: Author!
   title: String!
   content: String
-  createAt: DateTime!
   comments: [Comment!]
+  createAt: DateTime!
   publishedAt: DateTime
 }
 
 type Comment {
   id: Int!
   post: Post!
-  userName: String!
+  username: String!
   text: String!
   replyTo: Comment
 }
@@ -29,5 +30,25 @@ type Comment {
 type Query {
   author(id: Int!): Author
   post(id: Int!): Post
-  postComments(id: Int!): [Comment!]!
+  postComments(postId: Int!): [Comment!]
+  allPosts: [Post!]
+}
+
+input CreatePostInput {
+  authorId: Int!
+  title: String!
+  content: String
+}
+
+input CreateCommentInput {
+  postId: Int!
+  username: String!
+  text: String!
+  replyToId: Int
+}
+
+type Mutation {
+  createPost(input: CreatePostInput): Post
+  publishPost(id: Int!): Post
+  createComment(id: Int!, input: CreateCommentInput): Comment
 }

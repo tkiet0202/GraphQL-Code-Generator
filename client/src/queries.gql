@@ -1,0 +1,17 @@
+query AllPosts {
+  allPosts {
+    id
+    author {
+      displayName
+      picture
+    }
+    title
+    publishedAt
+    content
+    comments {
+      id
+      text
+      username
+    }
+  }
+}

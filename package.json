@@ -6,12 +6,19 @@
   "scripts": {
     "dev:server": "nodemon --watch server/src --ext ts --exec ts-node server/src/index.ts",
     "build:server": "",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "codegen": "graphql-codegen --config codegen.yml"
   },
   "author": "",
   "license": "ISC",
   "description": "",
   "devDependencies": {
+    "@graphql-codegen/cli": "5.0.7",
+    "@graphql-codegen/client-preset": "^4.8.2",
+    "@graphql-codegen/typescript-operations": "^4.6.1",
+    "@graphql-codegen/typescript-react-query": "^6.1.1",
+    "@graphql-codegen/typescript-resolvers": "^4.5.1",
+    "@types/cors": "^2.8.19",
     "@types/express": "^5.0.2",
     "@types/node": "^22.15.21",
     "@typescript-eslint/eslint-plugin": "^8.32.1",
@@ -23,12 +30,14 @@
     "eslint-plugin-prettier": "^5.4.0",
     "express": "^5.1.0",
     "express-graphql": "^0.12.0",
-    "graphql": "^15.10.1",
+    "graphql": "^14.7.0",
     "nodemon": "^3.1.10",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.3"
   },
   "dependencies": {
+    "@graphql-codegen/cli": "^5.0.7",
+    "cors": "^2.8.5",
     "graphql-iso-date": "^3.6.1"
   }
 }

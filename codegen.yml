@@ -1,0 +1,24 @@
+overwrite: true
+schema: "schema/schema.gql"
+generates:
+  client/src/generated.tsx:
+    documents: "client/**/*.gql" # where the queries are written
+    plugins:
+      - "typescript"
+      - "typescript-operations"
+      - "typescript-react-query"
+    config:
+      fetcher:
+        endpoint: "http://localhost:8080/"
+        fetchParams:
+          headers:
+            Content-Type: "application/json"
+            Authorization: "Bearer process.env.HEADER_AUTH_TOKEN"
+  server/src/generated.ts:
+    plugins:
+      - "typescript":
+      - "typescript-resolvers"
+      - "typescript-operations"
+  # ./graphql.schema.json:
+  #     plugins:
+  #         - "introspection"
