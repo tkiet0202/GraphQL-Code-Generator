@@ -1,17 +1,13 @@
-query AllPosts {
-  allPosts {
+query Author($id: Int!) {
+  author(id: $id) {
     id
-    author {
-      displayName
-      picture
-    }
-    title
-    publishedAt
-    content
-    comments {
+    displayName
+    createAt
+    posts {
       id
-      text
-      username
+      title
+      content
+      createAt
     }
   }
 }

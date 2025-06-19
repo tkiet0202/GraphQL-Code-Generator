@@ -1,0 +1,6 @@
+mutation createPost($input: CreatePostInput) {
+  createPost(input: $input) {
+    title
+    content
+  }
+}

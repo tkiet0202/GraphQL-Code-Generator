@@ -1,0 +1,8 @@
+query searchPosts($searchTerm: String) {
+  searchPosts(searchTerm: $searchTerm) {
+    id
+    title
+    content
+    publishedAt
+  }
+}

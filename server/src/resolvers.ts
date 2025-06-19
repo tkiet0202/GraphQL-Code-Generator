@@ -20,7 +20,7 @@ const resolvers = {
     replyTo: ({ replyToId }: { replyToId: number }, _args: any, ctx: any) => {
       if (typeof replyToId !== "number") return null;
       const matchedComment = ctx.db.comments.filter(
-        (comment: any) => comment.id === replyToId
+        (comment: any) => comment.id === replyToId,
       );
       return matchedComment.length > 0 ? matchedComment[0] : null;
     },
@@ -28,13 +28,32 @@ const resolvers = {
   Query: {
     author: (_parent: any, { id }: { id: number }, context: any) => {
       const matchedAuthors = context.db.authors.filter(
-        (el: any) => el.id === id
+        (el: any) => el.id === id,
       );
       return matchedAuthors.length > 0 ? matchedAuthors[0] : null;
     },
     post: (_parent: any, { id }: { id: number }, context: any) => {
       const matchedPosts = context.db.posts.filter((el: any) => el.id === id);
       return matchedPosts.length > 0 ? matchedPosts[0] : null;
+    },
+    searchPosts: (
+      _parent: any,
+      { searchTerm }: { searchTerm: string },
+      ctx: any,
+    ) => {
+      let filteredPosts = ctx.db.posts;
+      console.log("filteredPosts", filteredPosts);
+
+      if (searchTerm) {
+        filteredPosts = filteredPosts.filter((post: any) => {
+          return (
+            post.title &&
+            post.title.toLowerCase().includes(searchTerm.toLowerCase())
+          );
+        });
+      }
+
+      return filteredPosts;
     },
   },
   Mutation: {
@@ -45,7 +64,7 @@ const resolvers = {
       ctx.db.posts.push({
         id,
         ...input,
-        createdAt: new Date(),
+        createAt: new Date(),
         publishedAt: null,
       });
       return ctx.db.posts[id];

@@ -32,6 +32,7 @@ type Query {
   post(id: Int!): Post
   postComments(postId: Int!): [Comment!]
   allPosts: [Post!]
+  searchPosts(searchTerm: String, authorId: Int): [Post!]
 }
 
 input CreatePostInput {

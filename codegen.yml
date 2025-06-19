@@ -9,16 +9,11 @@ generates:
       - "typescript-react-query"
     config:
       fetcher:
-        endpoint: "http://localhost:8080/"
+        endpoint: "http://localhost:5000/graphql"
         fetchParams:
           headers:
             Content-Type: "application/json"
-            Authorization: "Bearer process.env.HEADER_AUTH_TOKEN"
-  server/src/generated.ts:
-    plugins:
-      - "typescript":
-      - "typescript-resolvers"
-      - "typescript-operations"
+        #     Authorization: "Bearer process.env.HEADER_AUTH_TOKEN"
   # ./graphql.schema.json:
   #     plugins:
   #         - "introspection"
